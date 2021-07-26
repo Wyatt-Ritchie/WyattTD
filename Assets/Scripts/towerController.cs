@@ -120,6 +120,8 @@ public class towerController : MonoBehaviour
                 if (node.transform.childCount == 0)
                 {
                     isPlaced = true;
+                    gameManager pSC = FindObjectOfType<gameManager>();
+                    pSC.updateMoney(-50);
                     transform.position = new Vector3(node.transform.position.x,
                                                      4.5f, node.transform.position.z);
                     gameObject.transform.parent = node.transform;

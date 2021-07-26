@@ -13,6 +13,8 @@ public class Spawner_Controller : MonoBehaviour
 
     public float spawnRate = 1.0f;
     public bool inProgress = false;
+
+    public int wave = 0;
     private IEnumerator coroutine;
     
 
@@ -34,7 +36,9 @@ public class Spawner_Controller : MonoBehaviour
         if (inProgress == false)
         {
             waveSize = initialWaveSize;
+            initialWaveSize += 3;
             inProgress = true;
+            wave += 1;
             StartCoroutine(coroutine);
         }
     }
@@ -53,6 +57,7 @@ public class Spawner_Controller : MonoBehaviour
         {
             inProgress = false;
             StopAllCoroutines();
+            
         }
         
     }

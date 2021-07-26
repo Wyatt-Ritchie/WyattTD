@@ -10,6 +10,8 @@ public class Enemy_Script : MonoBehaviour
     public Animator anim;
     public bool dead = false;
 
+    private gameManager pSC;
+    private bool paid = false;
     public bool isDead()
     {
         return dead;
@@ -18,6 +20,7 @@ public class Enemy_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pSC = FindObjectOfType<gameManager>();
         anim = GetComponent<Animator>();
         anim.SetBool("RUN", true);
     }
@@ -31,6 +34,7 @@ public class Enemy_Script : MonoBehaviour
             gameObject.tag = "Dead";
             anim.SetBool("RUN", false);
             anim.SetBool("Death", true);
+            
             StartCoroutine(callDeathAnim());
         }
     }
@@ -45,6 +49,12 @@ public class Enemy_Script : MonoBehaviour
     }
     public IEnumerator callDeathAnim()
     {
+        if (!paid)
+        {
+            pSC.updateMoney(10);
+            paid = true;
+        }
+        
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
     }

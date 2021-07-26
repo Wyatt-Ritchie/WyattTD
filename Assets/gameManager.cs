@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class gameManager : MonoBehaviour
 {
+    [Header("Manager Game Objects")]
     public GameObject[] Towers;
     public GameObject playableArea;
     public GameObject pathArea;
     public GameObject Node;
     public GameObject waypoint;
+
+    [Header("Manager Attributes")]
+    public int money = 100;
+    public int lives = 20;
+    public int towerPrice = 50;
 
     private int[,] enemyPath = new int[12, 12] { { 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
                                                  { 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
@@ -26,7 +32,7 @@ public class gameManager : MonoBehaviour
 
     public void spawnBulletTower()
     {
-        //Vector3 cursorPOS = Input.mousePosition;
+        if (money < towerPrice) return;
         GameObject towerGO = (GameObject)Instantiate(Towers[0], playableArea.transform.position, playableArea.transform.rotation);
         //towerGO.transform.position = cursorPOS;
 
@@ -35,9 +41,13 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         Grid = gameObject.GetComponent<Grid>();
-        
-        
-        for(int i = -6; i<6; i++)
+        GameObject mText = GameObject.Find("moneyText");
+        mText.GetComponent<UnityEngine.UI.Text>().text = "Gold: " + money.ToString();
+        GameObject lText = GameObject.Find("livesText");
+        lText.GetComponent<UnityEngine.UI.Text>().text = "Lives: " + lives.ToString();
+
+
+        for (int i = -6; i<6; i++)
         {
             for(int j = -6; j<6; j++)
             {
@@ -57,5 +67,26 @@ public class gameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public int getLives()
+    {
+        return lives;
+    }
+    public int getMoney()
+    {
+        return money;
+    }
+    public void reduceLives(int damage)
+    {
+        lives -= damage;
+        GameObject lText = GameObject.Find("livesText");
+        lText.GetComponent<UnityEngine.UI.Text>().text = "Lives: " + lives.ToString();
+    }
+    public void updateMoney(int delta)
+    {
+        money += delta;
+        GameObject mText = GameObject.Find("moneyText");
+        mText.GetComponent<UnityEngine.UI.Text>().text = "Gold: " + money.ToString();
     }
 }

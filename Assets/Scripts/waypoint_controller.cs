@@ -13,8 +13,9 @@ public class waypoint_controller : MonoBehaviour
     
     private int targetWaypointIndex = 0;
     private float minDistance = 0.1f;
-    private int lastWaypointIndex;
     public float movementSpeed = 0.1f;
+    public int damage = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +48,8 @@ public class waypoint_controller : MonoBehaviour
             else
             {
                 Debug.Log("Path Finished");
+                gameManager pSC = FindObjectOfType<gameManager>();
+                pSC.reduceLives(damage);
                 Destroy(gameObject);
             }
         }

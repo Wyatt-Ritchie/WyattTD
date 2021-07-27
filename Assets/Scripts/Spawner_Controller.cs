@@ -10,8 +10,9 @@ public class Spawner_Controller : MonoBehaviour
     public int waveSize;
 
     private int initialWaveSize;
+    private float initialSpawnRate;
 
-    public float spawnRate = 1.0f;
+    public float spawnRate = 2.0f;
     public bool inProgress = false;
 
     public int wave = 0;
@@ -36,6 +37,8 @@ public class Spawner_Controller : MonoBehaviour
         if (inProgress == false)
         {
             waveSize = initialWaveSize;
+            spawnRate = initialSpawnRate;
+            initialSpawnRate = spawnRate * 0.8f;
             initialWaveSize += 3;
             inProgress = true;
             wave += 1;
@@ -48,6 +51,7 @@ public class Spawner_Controller : MonoBehaviour
     {
         coroutine = spawn();
         initialWaveSize = waveSize;
+        initialSpawnRate = spawnRate;
     }
 
     // Update is called once per frame

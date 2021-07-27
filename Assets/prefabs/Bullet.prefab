@@ -111,6 +111,7 @@ MonoBehaviour:
   movementSpeed: 50.05
   myTarget: {fileID: 0}
   rotationStep: 10
+  damage: 1
 --- !u!65 &1351814923512753159
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -10,11 +10,13 @@ public class gameManager : MonoBehaviour
     public GameObject pathArea;
     public GameObject Node;
     public GameObject waypoint;
+    public GameObject[] PowerUps;
 
     [Header("Manager Attributes")]
     public int money = 100;
     public int lives = 20;
     public int towerPrice = 50;
+    private int[] weights = {95, 5};
 
     private int[,] enemyPath = new int[12, 12] { { 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
                                                  { 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
@@ -34,7 +36,7 @@ public class gameManager : MonoBehaviour
     {
         if (money < towerPrice) return;
         GameObject towerGO = (GameObject)Instantiate(Towers[0], playableArea.transform.position, playableArea.transform.rotation);
-        //towerGO.transform.position = cursorPOS;
+        
 
     }
     // Start is called before the first frame update

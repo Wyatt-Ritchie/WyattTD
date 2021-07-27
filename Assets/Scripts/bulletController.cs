@@ -8,6 +8,7 @@ public class bulletController : MonoBehaviour
     public float movementSpeed = 10.0f;
     public GameObject myTarget = null;
     public float rotationStep = 10.0f;
+    public int damage = 1;
 
     private Vector3 lastLoc;
 
@@ -48,10 +49,17 @@ public class bulletController : MonoBehaviour
         
     }
 
-    public void getTarget(GameObject _target)
+    public void setTarget(GameObject _target)
     {
         myTarget = _target;
     }
 
-
+    public GameObject getTarget()
+    {
+        return myTarget;
+    }
+    public int getDamage()
+    {
+        return damage;
+    }
 }

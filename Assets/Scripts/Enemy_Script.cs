@@ -41,9 +41,10 @@ public class Enemy_Script : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.tag == "Projectile")
+        bulletController bcSC = collision.GetComponent<bulletController>();
+        if(collision.tag == "Projectile" && bcSC.getTarget() == gameObject)
         {
-            health -= 1;
+            health -= bcSC.getDamage();
         }
          
     }

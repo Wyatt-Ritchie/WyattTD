@@ -139,7 +139,7 @@ public class towerController : MonoBehaviour
 
         if(bulletCont != null)
         {
-            bulletCont.getTarget(target);
+            bulletCont.setTarget(target);
         }
     }
 }

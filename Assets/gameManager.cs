@@ -91,4 +91,14 @@ public class gameManager : MonoBehaviour
         GameObject mText = GameObject.Find("moneyText");
         mText.GetComponent<UnityEngine.UI.Text>().text = "Gold: " + money.ToString();
     }
+
+    public GameObject[] getPowerups()
+    {
+        return PowerUps;
+    }
+
+    public int[] getWeights()
+    {
+        return weights;
+    }
 }

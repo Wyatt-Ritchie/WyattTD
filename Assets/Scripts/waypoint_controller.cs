@@ -78,4 +78,9 @@ public class waypoint_controller : MonoBehaviour
         Enemy_Script enSC = gameObject.GetComponent<Enemy_Script>();
         return enSC.isDead();
     }
+
+    public void setMovementSpeed(float speedChange)
+    {
+        movementSpeed += speedChange;
+    }
 }

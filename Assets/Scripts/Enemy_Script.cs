@@ -12,10 +12,6 @@ public class Enemy_Script : MonoBehaviour
 
     private gameManager pSC;
     private bool paid = false;
-    public bool isDead()
-    {
-        return dead;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +35,7 @@ public class Enemy_Script : MonoBehaviour
         }
     }
 
+    // function for updating damage after collision with bullet
     private void OnTriggerEnter(Collider collision)
     {
         bulletController bcSC = collision.GetComponent<bulletController>();
@@ -48,15 +45,48 @@ public class Enemy_Script : MonoBehaviour
         }
          
     }
+
+    // this coroutine increases the amount of money in the game manager and starts the death animation
     public IEnumerator callDeathAnim()
     {
         if (!paid)
         {
             pSC.updateMoney(10);
             paid = true;
+            GameObject powerUp = spawnPowerUp(pSC.getPowerups(), pSC.getWeights());
+            if(powerUp != null)
+            {
+                GameObject p = (GameObject)Instantiate(powerUp, this.transform.position, this.transform.rotation);
+            }
+            
         }
         
         yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
+    }
+
+    // returns the boolean dead
+    public bool isDead()
+    {
+        return dead;
+    }
+
+    private GameObject spawnPowerUp(GameObject[] powerups, int[] weights)
+    { 
+        
+        int roll = (int)(Random.Range(0f, 100f));
+        for(int i=0; i<weights.Length; i++)
+        {
+            if(roll <= weights[0])
+            {
+                break;
+            }
+            else
+            {
+                return powerups[0];
+            }
+        }
+
+        return null;
     }
 }

@@ -112,6 +112,7 @@ MonoBehaviour:
   target: {fileID: 0}
   firePoint: {fileID: 2909176039892706856}
   enemyTag: Enemy
+  nodes: []
   fireRate: 4
 --- !u!1 &3279645466197038137
 GameObject:

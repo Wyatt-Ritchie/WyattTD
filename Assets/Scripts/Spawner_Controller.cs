@@ -18,34 +18,6 @@ public class Spawner_Controller : MonoBehaviour
     public int wave = 0;
     private IEnumerator coroutine;
     
-
-    public IEnumerator spawn()
-    {
-        
-        while(waveSize > 0)
-        {
-            GameObject enemyGO = (GameObject)Instantiate(Enemies[0], Path.transform.position, Path.transform.rotation);
-            enemyGO.transform.Rotate(Vector3.up, 180);
-            waveSize -= 1;
-            yield return new WaitForSeconds(spawnRate);
-        }
-        //yield break;
-    }
-
-    public void clickSpawn()
-    {
-        if (inProgress == false)
-        {
-            waveSize = initialWaveSize;
-            spawnRate = initialSpawnRate;
-            initialSpawnRate = spawnRate * 0.8f;
-            initialWaveSize += 3;
-            inProgress = true;
-            wave += 1;
-            StartCoroutine(coroutine);
-        }
-    }
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -64,5 +36,31 @@ public class Spawner_Controller : MonoBehaviour
             
         }
         
+    }
+
+    public IEnumerator spawn()
+    {
+
+        while (waveSize > 0)
+        {
+            GameObject enemyGO = (GameObject)Instantiate(Enemies[0], Path.transform.position, Path.transform.rotation);
+            enemyGO.transform.Rotate(Vector3.up, 180);
+            waveSize -= 1;
+            yield return new WaitForSeconds(spawnRate);
+        }
+    }
+
+    public void clickSpawn()
+    {
+        if (inProgress == false)
+        {
+            waveSize = initialWaveSize;
+            spawnRate = initialSpawnRate;
+            initialSpawnRate = spawnRate * 0.8f;
+            initialWaveSize += 3;
+            inProgress = true;
+            wave += 1;
+            StartCoroutine(coroutine);
+        }
     }
 }
